@@ -1,0 +1,12 @@
+.div-header{
+    display: flex;
+    height: 15vh;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+}
+
+.header{
+    font-size: 3.5rem;
+    font-family:arial;
+}
