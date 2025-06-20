@@ -1,0 +1,25 @@
+.div-input{
+    display:flex;
+    height:10vh;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    gap: 2rem;
+}
+
+.add-task{
+    font-size:2rem;
+    font-family:Arial, Helvetica, sans-serif
+}
+
+.input{
+    font-size:2rem;
+    border: 1px solid #ccc;
+    border-radius: 10px; 
+    padding: 0.5rem;
+}
+
+.button{
+    font-size:2rem;
+    font-family:Arial, Helvetica, sans-serif
+}
