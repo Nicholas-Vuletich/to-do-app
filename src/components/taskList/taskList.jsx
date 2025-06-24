@@ -1,10 +1,10 @@
 import "./taskList.css"
 
 
-export default function TaskList() {
+export default function TaskList({ textToDisplay }) {
     return (
         <div className="task-list" >
-            <p>Here are my to-do job list </p>
+            <p> {textToDisplay} </p>
         </div>
     )
 }
