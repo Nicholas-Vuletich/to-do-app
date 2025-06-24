@@ -8,12 +8,19 @@ import Footer from "./components/footer/footer"
 function App() {
 
   const [inputValue, setInputValue] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  function addTask() {
+    if (inputValue.trim() === "") return;
+    setTasks([...tasks, inputValue]);
+    setInputValue("");
+  }
   
   return (
     <div>
       <Header />
-      <Input value={inputValue} onValueChange={setInputValue} />
-      <TaskList textToDisplay={inputValue} />
+      <Input value={inputValue} onValueChange={setInputValue} onAdd={addTask} />
+      <TaskList tasks={tasks} />
       <Footer />
     </div>
   )

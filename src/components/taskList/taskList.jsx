@@ -1,10 +1,14 @@
 import "./taskList.css"
 
 
-export default function TaskList({ textToDisplay }) {
+export default function TaskList({ tasks }) {
     return (
         <div className="task-list" >
-            <p> {textToDisplay} </p>
+            <ul>
+                {tasks.map((task, index) => (
+                    <li key={index}>{task}</li>
+                ))}
+            </ul>
         </div>
     )
 }
