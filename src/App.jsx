@@ -12,7 +12,7 @@ function App() {
 
   function addTask() {
     if (inputValue.trim() === "") return;
-    setTasks([...tasks, inputValue]);
+    setTasks([...tasks, {text: inputValue, completed: false}]);
     setInputValue("");
   }
   
@@ -20,10 +20,16 @@ function App() {
     <div>
       <Header />
       <Input value={inputValue} onValueChange={setInputValue} onAdd={addTask} />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} onToggle={toggleTaskCompleted} />
       <Footer />
     </div>
   )
+
+  function toggleTaskCompleted(index) {
+    const updatedTasks = tasks.map((task, i) => i === index ? {...task, completed: !task.completed} : task );
+    setTasks(updatedTasks);
+  }
+
 }
 
 export default App
