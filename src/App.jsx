@@ -17,12 +17,17 @@ function App() {
   }
 
   const completedTasks = tasks.filter(task => task.completed).length;
+
+  function deleteTask(index) {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks);
+  }
   
   return (
     <div>
       <Header />
       <Input value={inputValue} onValueChange={setInputValue} onAdd={addTask} />
-      <TaskList tasks={tasks} onToggle={toggleTaskCompleted} />
+      <TaskList tasks={tasks} onToggle={toggleTaskCompleted} onDelete={deleteTask} />
       <Footer totalTasks={tasks.length} completedTasks={completedTasks} />
     </div>
   )

@@ -1,7 +1,7 @@
 import "./taskList.css"
 
 
-export default function TaskList({ tasks, onToggle }) {
+export default function TaskList({ tasks, onToggle, onDelete }) {
     return (
         <div className="task-list" >
             <ul>
@@ -12,6 +12,7 @@ export default function TaskList({ tasks, onToggle }) {
                         onChange={() => onToggle(index)}
                     />
                     {task.text}
+                    <button onClick={() => onDelete(index)} >❌</button>
                     </li>
                 ))}
             </ul>
