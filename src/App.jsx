@@ -15,13 +15,15 @@ function App() {
     setTasks([...tasks, {text: inputValue, completed: false}]);
     setInputValue("");
   }
+
+  const completedTasks = tasks.filter(task => task.completed).length;
   
   return (
     <div>
       <Header />
       <Input value={inputValue} onValueChange={setInputValue} onAdd={addTask} />
       <TaskList tasks={tasks} onToggle={toggleTaskCompleted} />
-      <Footer />
+      <Footer totalTasks={tasks.length} completedTasks={completedTasks} />
     </div>
   )
 
