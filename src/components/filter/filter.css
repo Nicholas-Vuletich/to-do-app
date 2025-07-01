@@ -1,0 +1,7 @@
+.filter-div{
+    display:flex;
+    height:10vh;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+}

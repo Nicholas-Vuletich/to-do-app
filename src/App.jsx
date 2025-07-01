@@ -2,6 +2,7 @@ import {React} from "react"
 import { useState } from "react";
 import Header from "./components/header/header.jsx"
 import Input from "./components/input/input.jsx"
+import Filter from "./components/filter/filter.jsx"
 import TaskList from "./components/taskList/taskList/"
 import Footer from "./components/footer/footer"
 
@@ -9,6 +10,7 @@ function App() {
 
   const [inputValue, setInputValue] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState("all");
 
   function addTask() {
     if (inputValue.trim() === "") return;
@@ -22,12 +24,23 @@ function App() {
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
   }
+
+  function handleFilterChange(newFilter) {
+    setFilter(newFilter);
+  }
+
+  const filteredTasks = tasks.filter(task => {
+    if (filter === "all") return true;
+    if (filter === "active") return !task.completed;
+    if(filter === "completed") return task.completed;
+  })
   
   return (
     <div>
       <Header />
       <Input value={inputValue} onValueChange={setInputValue} onAdd={addTask} />
-      <TaskList tasks={tasks} onToggle={toggleTaskCompleted} onDelete={deleteTask} />
+      <Filter filter={filter} handleFilterChange={handleFilterChange}/>
+      <TaskList tasks={filteredTasks} onToggle={toggleTaskCompleted} onDelete={deleteTask} />
       <Footer totalTasks={tasks.length} completedTasks={completedTasks} />
     </div>
   )
