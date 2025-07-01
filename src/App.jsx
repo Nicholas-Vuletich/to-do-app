@@ -34,12 +34,17 @@ function App() {
     if (filter === "active") return !task.completed;
     if(filter === "completed") return task.completed;
   })
+
+  function clearCompletedTasks() {
+    const activeTasks = tasks.filter(task => !task.completed);
+    setTasks(activeTasks);
+  }
   
   return (
     <div>
       <Header />
       <Input value={inputValue} onValueChange={setInputValue} onAdd={addTask} />
-      <Filter filter={filter} handleFilterChange={handleFilterChange}/>
+      <Filter filter={filter} handleFilterChange={handleFilterChange} clearCompletedTasks={clearCompletedTasks} />
       <TaskList tasks={filteredTasks} onToggle={toggleTaskCompleted} onDelete={deleteTask} />
       <Footer totalTasks={tasks.length} completedTasks={completedTasks} />
     </div>
