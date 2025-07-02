@@ -14,7 +14,7 @@ function App() {
 
   function addTask() {
     if (inputValue.trim() === "") return;
-    setTasks([...tasks, {text: inputValue, completed: false}]);
+    setTasks([...tasks, {text: inputValue, completed: false, isEditing: false}]);
     setInputValue("");
   }
 
@@ -39,22 +39,33 @@ function App() {
     const activeTasks = tasks.filter(task => !task.completed);
     setTasks(activeTasks);
   }
-  
-  return (
-    <div>
-      <Header />
-      <Input value={inputValue} onValueChange={setInputValue} onAdd={addTask} />
-      <Filter filter={filter} handleFilterChange={handleFilterChange} clearCompletedTasks={clearCompletedTasks} />
-      <TaskList tasks={filteredTasks} onToggle={toggleTaskCompleted} onDelete={deleteTask} />
-      <Footer totalTasks={tasks.length} completedTasks={completedTasks} />
-    </div>
-  )
+
+  function startEditingTask(index) {
+    const updatedTasks = tasks.map((task, i) => i === index ? {...task, isEditing: true } : task);
+    setTasks(updatedTasks);
+  }
+
+  function saveTaskEdit(index, newText) {
+    const updatedTasks = tasks.map((task, i) => i === index ? {...task, text: newText, isEditing: false } : task);
+    setTasks(updatedTasks);
+  }
 
   function toggleTaskCompleted(index) {
     const updatedTasks = tasks.map((task, i) => i === index ? {...task, completed: !task.completed} : task );
     setTasks(updatedTasks);
   }
 
-}
 
+  
+  return (
+    <div>
+      <Header />
+      <Input value={inputValue} onValueChange={setInputValue} onAdd={addTask} />
+      <Filter filter={filter} handleFilterChange={handleFilterChange} clearCompletedTasks={clearCompletedTasks} />
+      <TaskList tasks={filteredTasks} onToggle={toggleTaskCompleted} onDelete={deleteTask} onStartEditing={startEditingTask} onSaveEdit={saveTaskEdit} />
+      <Footer totalTasks={tasks.length} completedTasks={completedTasks} />
+    </div>
+  )
+
+}
 export default App
